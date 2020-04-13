@@ -12,9 +12,24 @@ class CartItem extends React.Component{
         //to bind the "this" to increaseQuantity function
         //this.increaseQuantity=this.increaseQuantity.bind(this);
     }
-    //pointer function keep the reference of the object 
+    //arrow function keep the reference of the object 
     increaseQuantity=()=>{
-        console.log("print");
+        console.log("this",this.state);
+        //setState form 1
+        //setState is a function from Component (react)
+        // this.setState({
+        //     qty:this.state.qty+1
+        // });
+
+        //setState form 2
+        //In this we are using function calling instead of object unlike first one
+        //if previous form required used this one
+        this.setState((prevState)=>{
+          return {
+              qty:prevState.qty+1
+          }  
+        })
+
     }
     render(){
         //object disstructuring
@@ -26,8 +41,8 @@ class CartItem extends React.Component{
             </div> 
             <div className="right-block">
                 <div style={{fontSize:25}}>{title}</div>
-                <div style={{color:'#777'}}>{price}</div>
-                <div style={{color:'#777'}}>{qty}</div>
+                <div style={{color:'#777'}}>Price:{price}</div>
+                <div style={{color:'#777'}}>Qty:{qty}</div>
             </div>
             <div className="cart-item-actions">
             <img 
