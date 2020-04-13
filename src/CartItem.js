@@ -27,10 +27,24 @@ class CartItem extends React.Component{
         this.setState((prevState)=>{
           return {
               qty:prevState.qty+1
-          }  
-        })
-
+            }  
+        });
     }
+    decreaseQuantity=()=>{
+        //disstruturing
+        const{qty}=this.state;
+        
+        if(qty===0){
+            return ;
+        }
+        //set state is asyncronous function
+        this.setState((prevState)=>{
+            return{
+                qty:prevState.qty-1
+            }
+        });
+    }
+    
     render(){
         //object disstructuring
         const{price,title,qty}=this.state;
@@ -56,7 +70,7 @@ class CartItem extends React.Component{
                 alt="decrease" 
                 className="action-icons" 
                 src="https://as2.ftcdn.net/jpg/03/23/33/19/500_F_323331925_VvJaAQ5sZz8VoEn5qDYGkB7Wu4O80zKL.jpg"
-                
+                onClick={this.decreaseQuantity}
             />
 
             <img 
