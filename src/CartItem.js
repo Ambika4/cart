@@ -1,40 +1,6 @@
 import React from 'react';
 
 class CartItem extends React.Component{
-  
-    //arrow function keep the reference of the object 
-    increaseQuantity=()=>{
-        console.log("this",this.state);
-        //setState form 1
-        //setState is a function from Component (react)
-        // this.setState({
-        //     qty:this.state.qty+1
-        // });
-
-        //setState form 2
-        //In this we are using function calling instead of object unlike first one
-        //if previous form required used this one
-        this.setState((prevState)=>{
-          return {
-              qty:prevState.qty+1
-            }  
-        });
-    }
-    decreaseQuantity=()=>{
-        //disstruturing
-        const{qty}=this.state;
-        
-        if(qty===0){
-            return ;
-        }
-        //set state is asyncronous function
-        this.setState((prevState)=>{
-            return{
-                qty:prevState.qty-1
-            }
-        });
-    }
-    
     render(){
         //object disstructuring
         console.log('this.props',this.props);
@@ -54,7 +20,8 @@ class CartItem extends React.Component{
                 alt="increase"
                 className="action-icons" 
                 src="https://image.flaticon.com/icons/svg/1828/1828817.svg"
-                onClick={this.increaseQuantity}
+                //function to increase quantity
+                onClick={()=>this.props.onIncreaseQuantity(this.props.product)}
             />
 
             <img
