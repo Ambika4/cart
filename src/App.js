@@ -12,7 +12,7 @@ class App extends React.Component{
             price:999,
             title:'Phone',
             qty:1.,
-            img:'',
+            img:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTCAikW81gQQSaw9zDy-cGPv-POYp_z69NcebEeLrS97RP08-wI&usqp=CAU',
             id:1
             
             //to bind the "this" to increaseQuantity function
@@ -22,7 +22,7 @@ class App extends React.Component{
             price:999,
             title:'Watch',
             qty:1.,
-            img:'',
+            img:'https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
             id:2
             //to bind the "this" to increaseQuantity function
             //this.increaseQuantity=this.increaseQuantity.bind(this);
@@ -31,7 +31,7 @@ class App extends React.Component{
             price:2000,
             title:'Fitbit',
             qty:1.,
-            img:'',
+            img:'https://images-na.ssl-images-amazon.com/images/I/71YGrhhoqUL._AC_UX569_.jpg',
             id:3
             
             //to bind the "this" to increaseQuantity function
@@ -85,14 +85,22 @@ getCartCount=()=>{
   
   let count=0;
 
-  products.forEach((product)=>{
+  products.map((product)=>{
     count+=product.qty;
   })
   console.log(count);
   return count;
 }
 
+getCartTotal=()=>{
+  const {products}=this.state;
 
+  let total=0;
+  products.forEach((product)=>{
+    total+=product.qty*product.price;
+  })
+  return total;
+}
   render(){
     const {products}=this.state;
     return (
@@ -104,6 +112,7 @@ getCartCount=()=>{
       onDecreaseQuantity={this.handleDecreaseQuantity}
       onDeleteProduct={this.handleDeleteProduct}
       />
+      <div style={{padding:10,fontSize:20}}>ToTAL:{this.getCartTotal()}</div>
       </div>
     );
   }
