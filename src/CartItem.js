@@ -1,16 +1,14 @@
 import React from 'react';
 
-class CartItem extends React.Component{
-    render(){
+const CartItem =(props)=>{
         //object disstructuring
-        console.log('this.props',this.props);
-        const{price,title,qty}=this.props.product;
+        const{price,title,qty}=props.product;
         const{
             product,
             onIncreaseQuantity,
             onDecreaseQuantity,
             onDeleteProduct
-        }=this.props
+        }=props
         return(
         <div className="cart-item">
             <div className="left-block"> 
@@ -27,28 +25,28 @@ class CartItem extends React.Component{
                 className="action-icons" 
                 src="https://image.flaticon.com/icons/svg/1828/1828817.svg"
                 //function to increase quantity
-                onClick={()=>this.props.onIncreaseQuantity(product)}
+                onClick={()=>props.onIncreaseQuantity(product)}
             />
 
             <img
                 alt="decrease" 
                 className="action-icons" 
                 src="https://as2.ftcdn.net/jpg/03/23/33/19/500_F_323331925_VvJaAQ5sZz8VoEn5qDYGkB7Wu4O80zKL.jpg"
-                onClick={()=>this.props.onDecreaseQuantity(product)}
+                onClick={()=>props.onDecreaseQuantity(product)}
             />
 
             <img 
                 alt="delete" 
                 className="action-icons" 
                 src="https://image.flaticon.com/icons/svg/1632/1632602.svg"
-                onClick={()=>this.props.onDeleteProduct(product.id)}
+                onClick={()=>props.onDeleteProduct(product.id)}
             />
         </div>
         </div>
         );
     
     }
-}
+
 const styles={
     image:{
         height:110,
