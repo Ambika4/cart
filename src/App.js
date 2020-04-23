@@ -11,6 +11,7 @@ class App extends React.Component{
         products:[],
         loading:true
     }
+    this.db=firebase.firestore();
     //to bind the "this" to increaseQuantity function
     //this.increaseQuantity=this.increaseQuantity.bind(this);
 
@@ -40,8 +41,7 @@ componentDidMount(){
     //     loading:false
     //   })
     // })
-      firebase
-      .firestore()
+      this.db
       .collection('products')
       //Evenlister whenever something is changed then it will update automatically
       .onSnapshot((snapshot)=>{
@@ -122,11 +122,29 @@ getCartTotal=()=>{
   })
   return total;
 }
+addProduct=()=>{
+  this.db
+    .collection('products')
+    .add({
+      img:'',
+      price:900,
+      qty:1,
+      title:'TV'
+    })
+    .then((docRef)=>{
+      console.log('New product added successfully',docRef);
+
+    })
+    .catch((error)=>{
+      console.log('Error:',error);
+    })
+}
   render(){
     const {products,loading}=this.state;
     return (
       <div className="App">
       <Navbar count={this.getCartCount()}/>
+      <button onClick={this.addProduct} style={{padding:20,fontSize:20}}>Add a product</button>
       <Cart
       products={products}
       onIncreaseQuantity={this.handleIncreaseQuantity}
